@@ -33,13 +33,9 @@ public class MergeSort {
         for(int k=0; k<D.length; k++)
         {
             if(i<B.length&&(j>=C.length||B[i]<=C[j])) {     //j>=C.length => if j's gone past the entirety of C, just copy B's elements
-//                System.out.println("B["+i+"] is "+B[i]+", C["+j+"] is "+C[j]+", copying over B["+i+"]"); //Integer.toString(
-//                System.out.println("Copying B["+i+"] to D");
                 D[k]=B[i];
                 i++;
-            } else {                                                                                     //if(j<C.length&&(C[j]<B[i]||i==B.length-1)) {
-//                System.out.println("B["+i+"] is "+B[i]+", C["+j+"] is "+C[j]+", copying over C["+j+"]");
-//                System.out.println("Copying C["+j+"] to D");
+            } else {                                        //if(j<C.length&&(C[j]<B[i]||i==B.length-1)) {
                 D[k]=C[j];
                 j++;
             }
