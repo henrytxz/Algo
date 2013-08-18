@@ -1,5 +1,7 @@
 package MergeSort;
 
+import org.junit.Test;
+
 /**
  * Created with IntelliJ IDEA.
  * User: henry
@@ -8,8 +10,26 @@ package MergeSort;
  * To change this template use File | Settings | File Templates.
  */
 public class MergeSortTest {
-    @org.junit.Test
-    public void testMergeSort() throws Exception {
+        private MergeSortTest(){};
+
+        @Test
+        public static void test1() {
+            int[] A = new int[]{54044,
+                                14108,
+                                79294,
+                                29649,
+                                25260,
+                                60660,
+                                2995 ,
+                                53777,
+                                49689,
+                                9083};
+
+            int[] result = MergeSort.MergeSort(A,A.length,0,A.length-1);
+
+        }
+
+
 //      test cases:
 
 //        int[] A = new int[]{1,3,5,7,2,4,6,8};
@@ -37,5 +57,5 @@ public class MergeSortTest {
 //                        60660,
 //                        2995 ,
 //                        53777};
-    }
+
 }
