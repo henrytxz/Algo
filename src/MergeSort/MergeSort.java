@@ -1,5 +1,7 @@
 package MergeSort;
 
+import UtilityClasses.MyArrayUtil;
+
 /**
  * Created with IntelliJ IDEA.
  * User: henry
@@ -9,12 +11,14 @@ package MergeSort;
  */
 public class MergeSort {
     public static int[] MergeSort(int[] A, int n, int begin, int end) {
-        System.out.println("MergeSort on "+begin+":"+end);
+//        System.out.println("MergeSort on "+begin+":"+end);
         if (begin==end)
             return new int[]{A[begin]};
 
-        int[] B = MergeSort(A, n/2, begin+0, begin+n/2-1);  //todo: fix it when n is odd
-        int[] C = MergeSort(A, n/2, begin+n/2, begin+n-1);
+        int leftHalfLength  = n/2;
+        int rightHalfLength = n-leftHalfLength;
+        int[] B = MergeSort(A, leftHalfLength,  begin+0,              begin+leftHalfLength-1);  //todo: fix it when n is odd
+        int[] C = MergeSort(A, rightHalfLength, begin+leftHalfLength, begin+n-1);
         int[] D = Merge(B, C);
         return D;
     }
@@ -46,16 +50,9 @@ public class MergeSort {
 //            }
         }
 
-        System.out.println("D is:");
-        printIntArray(D);
+//        System.out.println("D is:");
+//        MyArrayUtil.printIntArray(D);
 
         return D;
-    }
-
-    public static void printIntArray(int[] array) {
-        for (int element : array) {
-            System.out.print(element+" ");
-        }
-        System.out.println();
     }
 }
