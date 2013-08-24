@@ -1,12 +1,12 @@
 package DivideAndConquer;
 
-import org.junit.Before;
+import UtilityClasses.MyArrayUtil;
 import org.junit.Test;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
-import UtilityClasses.MyArrayUtil;
 
 
 /**
@@ -25,7 +25,7 @@ public class MergeSortTest {
 
     @Test
     public void testMergeSort() {
-        File file = new File("C:/Users/henry/Dropbox/Coursera/Coursera algo class/Programming Questions/Programming Questions week 1/IntegerArray.txt");
+        File file = new File("C:/Users/henry/Dropbox/Coursera/Coursera algo class/Programming Questions/week 1/IntegerArray.txt");
         try {
             List<Integer> list = MyArrayUtil.ListIntegerFromFile(file);
 

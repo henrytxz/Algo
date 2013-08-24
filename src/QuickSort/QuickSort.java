@@ -20,7 +20,7 @@ public class QuickSort {
     }
 
     public static int partition(int[] A, int pivotPosition, int start, int end) {
-        System.out.println("partition(A,"+pivotPosition+","+start+","+end+")");
+//        System.out.println("partition(A,"+pivotPosition+","+start+","+end+")");
         if (A.length<2 || start==end)   // A is so small that it requires no sorting, or the partition is 1 element only
             return 0;
         if (start<0)

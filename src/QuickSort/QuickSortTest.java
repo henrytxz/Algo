@@ -4,6 +4,11 @@ import UtilityClasses.MyArrayUtil;
 import junit.framework.Assert;
 import org.junit.Test;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.List;
+
 import static QuickSort.QuickSort.sortAndCountNumberOfSwaps;
 import static QuickSort.QuickSort.swap;
 
@@ -34,5 +39,24 @@ public class QuickSortTest {
         swap(A,0,1);
         Assert.assertEquals(2, A[0]);
         Assert.assertEquals(1, A[1]);
+    }
+
+    @Test
+    public void testQuickSort() {
+        File file = new File("C:/Users/henry/Dropbox/Coursera/Coursera algo class/Programming Questions/week 2/QuickSort.txt");
+        try {
+            List<Integer> list = MyArrayUtil.ListIntegerFromFile(file);
+
+            int[] A = MyArrayUtil.ListIntegersTointArray(list);
+
+            QuickSort.sortAndCountNumberOfSwaps(A);
+
+            MyArrayUtil.checkArrayintSorted(A);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
