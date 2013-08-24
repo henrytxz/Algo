@@ -39,7 +39,7 @@ public class MyArrayUtil {
                 return false;
             }
         }
-        System.out.println("yeeaah sorted!");
+        System.out.println("it's sorted!");
         return true;
     }
 
@@ -47,9 +47,28 @@ public class MyArrayUtil {
         BufferedReader br = new BufferedReader(new FileReader(file));
         List<Integer> list = new ArrayList<Integer>();
         String row = br.readLine();
+
         while (row != null) {
             list.add(Integer.valueOf(row));
             row = br.readLine();
+        }
+        br.close();
+        return list;
+    }
+
+    public static List<Integer> ListIntegerFromFile(File file, int numberOfLinesToGet) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        List<Integer> list = new ArrayList<Integer>();
+        String row = br.readLine();
+
+        int count = 0;
+
+        while (row != null) {
+            if (count == numberOfLinesToGet)
+                break;
+            list.add(Integer.valueOf(row));
+            row = br.readLine();
+            count++;
         }
         br.close();
         return list;

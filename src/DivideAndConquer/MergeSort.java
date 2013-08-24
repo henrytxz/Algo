@@ -1,6 +1,4 @@
-package MergeSort;
-
-import UtilityClasses.MyArrayUtil;
+package DivideAndConquer;
 
 /**
  * Created with IntelliJ IDEA.
@@ -43,11 +41,6 @@ public class MergeSort {
                 D[k]=C[j];
                 j++;
             }
-
-//            else {
-//                D[k]=C[j];
-//                j++;
-//            }
         }
 
 //        System.out.println("D is:");
