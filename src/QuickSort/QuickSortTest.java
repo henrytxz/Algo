@@ -2,6 +2,7 @@ package QuickSort;
 
 import UtilityClasses.MyArrayUtil;
 import junit.framework.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -41,6 +42,7 @@ public class QuickSortTest {
         Assert.assertEquals(1, A[1]);
     }
 
+    @Ignore //QuickSort.txt not found, can't find Programming Questions/week 2...
     @Test
     public void testQuickSort() {
         File file = new File("C:/Users/henry/Dropbox/Coursera/Coursera algo class/Programming Questions/week 2/QuickSort.txt");
@@ -55,8 +57,10 @@ public class QuickSortTest {
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Assert.fail();
         } catch (IOException e) {
             e.printStackTrace();
+            Assert.fail();
         }
     }
 }
