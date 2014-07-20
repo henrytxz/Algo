@@ -8,7 +8,7 @@ import edu.princeton.cs.introcs.StdRandom;
  */
 
 public class Quick {
-//    static Logger logger = LoggerFactory.getLogger(Quick.class);
+//    static Logger logger = LoggerFactory.getLogger(Quick.class);  todo
 //    java.util.logging.Logger logger =
     public static void sort(Comparable[] a) {
         StdRandom.shuffle(a);

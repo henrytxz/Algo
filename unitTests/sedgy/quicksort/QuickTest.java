@@ -14,15 +14,9 @@ public class QuickTest extends Quick {
     private Integer[] a = {3,1,2};
     private String[] A = {"K","R","A","T","E","L","E","P","U","I","M","Q","C","X","O","S"};
 
-//    @Test
-//    public void testSort() {
-//        Integer[] a = {3,1,2};
-//        sort(a, 0, 0);
-//    }
-
     @Test
     public void testQuickSort() {
-        File file = new File("resources/QuickSortDebug.txt");
+        File file = new File("resources/QuickSort.txt");
         try {
             List<Integer> list = MyArrayUtil.ListIntegerFromFile(file);
 
