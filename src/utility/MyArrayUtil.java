@@ -39,7 +39,6 @@ public class MyArrayUtil {
                 return false;
             }
         }
-        System.out.println("it's sorted!");
         return true;
     }
 
