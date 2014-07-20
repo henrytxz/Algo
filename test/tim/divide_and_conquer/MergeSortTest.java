@@ -1,6 +1,7 @@
-package DivideAndConquer;
+package tim.divide_and_conquer;
 
-import UtilityClasses.MyArrayUtil;
+import junit.framework.Assert;
+import utility.MyArrayUtil;
 import org.junit.Test;
 
 import java.io.File;
@@ -10,41 +11,37 @@ import java.util.List;
 
 
 /**
- * Created with IntelliJ IDEA.
  * User: henry
  * Date: 8/18/13
  * Time: 10:01 AM
- * To change this template use File | Settings | File Templates.
  */
+
 public class MergeSortTest {
-//
-//    @Before
-//    public void setUp() throws Exception {
-//
-//    }
 
     @Test
     public void testMergeSort() {
-        File file = new File("C:/Users/henry/Dropbox/Coursera/Coursera algo class/Programming Questions/week 1/IntegerArray.txt");
+        File file = new File("resources/IntegerArray.txt");
         try {
             List<Integer> list = MyArrayUtil.ListIntegerFromFile(file);
 
-            int[] A = MyArrayUtil.ListIntegersTointArray(list);
+            Integer[] A = MyArrayUtil.ListIntegersToIntegerArray(list);
 
-            int[] result = MergeSort.MergeSort(A, A.length, 0, A.length-1);
+            Integer[] result = MergeSort.MergeSort(A, A.length, 0, A.length-1);
 
-            MyArrayUtil.checkArrayintSorted(result);
+            Assert.assertTrue(MyArrayUtil.checkArrayIntegerSorted(result));
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Assert.fail();
         } catch (IOException e) {
             e.printStackTrace();
+            Assert.fail();
         }
     }
 
     @Test
     public void test1() {
-        int[] A = new int[]{54044,
+        Integer[] A = new Integer[]{54044,
                             14108,
                             79294,
                             29649,
@@ -55,8 +52,8 @@ public class MergeSortTest {
                             49689,
                             9083};
 
-        int[] result = MergeSort.MergeSort(A,A.length,0,A.length-1);
-        MyArrayUtil.checkArrayintSorted(result);
+        Integer[] result = MergeSort.MergeSort(A,A.length,0,A.length-1);
+        MyArrayUtil.checkArrayIntegerSorted(result);
     }
 
 

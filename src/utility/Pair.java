@@ -1,11 +1,8 @@
-package UtilityClasses;
+package utility;
 
 /**
- * Created with IntelliJ IDEA.
  * User: henry
  * Date: 8/18/13
- * Time: 11:39 AM
- * To change this template use File | Settings | File Templates.
  */
 public class Pair<L,R> {
 

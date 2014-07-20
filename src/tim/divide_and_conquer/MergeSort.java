@@ -1,33 +1,32 @@
-package DivideAndConquer;
+package tim.divide_and_conquer;
 
 /**
- * Created with IntelliJ IDEA.
  * User: henry
  * Date: 8/17/13
  * Time: 3:03 PM
- * To change this template use File | Settings | File Templates.
  */
+
 public class MergeSort {
-    public static int[] MergeSort(int[] A, int n, int begin, int end) {
+    public static Integer[] MergeSort(Integer[] A, int n, int begin, int end) {
 //        System.out.println("MergeSort on "+begin+":"+end);
         if (begin==end)
-            return new int[]{A[begin]};
+            return new Integer[]{A[begin]};
 
         int leftHalfLength  = n/2;
         int rightHalfLength = n-leftHalfLength;
-        int[] B = MergeSort(A, leftHalfLength,  begin+0,              begin+leftHalfLength-1);  //todo: fix it when n is odd
-        int[] C = MergeSort(A, rightHalfLength, begin+leftHalfLength, begin+n-1);
-        int[] D = Merge(B, C);
+        Integer[] B = MergeSort(A, leftHalfLength,  begin+0,              begin+leftHalfLength-1);  //todo: fix it when n is odd
+        Integer[] C = MergeSort(A, rightHalfLength, begin+leftHalfLength, begin+n-1);
+        Integer[] D = Merge(B, C);
         return D;
     }
 
-    private static int[] Merge(int[] B, int[] C) {
+    private static Integer[] Merge(Integer[] B, Integer[] C) {
         if (B==null)
             throw new IllegalArgumentException("first array argument is empty, can't merge");
         if (C==null)
             throw new IllegalArgumentException("second array argument is empty, can't merge");
 
-        int[] D = new int[B.length+C.length];
+        Integer[] D = new Integer[B.length+C.length];
 
         int i=0;
         int j=0;
@@ -44,7 +43,7 @@ public class MergeSort {
         }
 
 //        System.out.println("D is:");
-//        MyArrayUtil.printIntArray(D);
+//        MyArrayUtil.printArray(D);
 
         return D;
     }

@@ -1,25 +1,24 @@
-package QuickSort;
+package tim.quicksort;
 
 import java.util.Arrays;
 
 /**
- * Created with IntelliJ IDEA.
  * User: henry
  * Date: 8/24/13
  * Time: 1:33 PM
- * To change this template use File | Settings | File Templates.
  */
+
 public class QuickSort {
-    public static int sortAndCountNumberOfSwaps(int[] A) {
+    public static int sortAndCountNumberOfSwaps(Integer[] A) {
         int pivotPosition = pickPivotStart(A, 0, A.length - 1);
         return partition(A,pivotPosition,0,A.length-1);
     }
 
-    private static int pickPivotStart(int[] A, int start, int end) {
+    private static int pickPivotStart(Integer[] A, int start, int end) {
         return start;
     }
 
-    public static int partition(int[] A, int pivotPosition, int start, int end) {
+    public static int partition(Integer[] A, int pivotPosition, int start, int end) {
 //        System.out.println("partition(A,"+pivotPosition+","+start+","+end+")");
         if (A.length<2 || start==end)   // A is so small that it requires no sorting, or the partition is 1 element only
             return 0;
@@ -67,7 +66,7 @@ public class QuickSort {
         return swapCount+countSwapsL+countSwapsR;
     }
 
-    static void swap(int[] A, int i, int j) {
+    static void swap(Integer[] A, int i, int j) {
         if (i<A.length&&j<A.length) {
             int tmp = A[i];
             A[i]=A[j];

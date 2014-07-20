@@ -1,4 +1,4 @@
-package UtilityClasses;
+package utility;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -17,22 +17,22 @@ import java.util.List;
 public class MyArrayUtil {
     private MyArrayUtil() {}
 
-    public static void printIntArray(int[] array) {
-        for (int element : array) {
+    public static void printArray(Comparable[] array) {
+        for (Comparable element : array) {
             System.out.print(element+" ");
         }
         System.out.println();
     }
 
-    public static int[] ListIntegersTointArray(List<Integer> list) {
-        int[] result = new int[list.size()];
+    public static Integer[] ListIntegersToIntegerArray(List<Integer> list) {
+        Integer[] result = new Integer[list.size()];
         for (int i=0; i<list.size(); i++) {
             result[i] = list.get(i);
         }
         return result;
     }
 
-    public static boolean checkArrayintSorted(int[] result) {
+    public static boolean checkArrayIntegerSorted(Integer[] result) {
         for (int i=0;i<result.length-1;i++) {
             if (result[i]>result[i+1]) {
                 System.out.println("not sorted! result["+i+"]="+result[i]+", result["+(i+1)+"]="+result[i+1]);
