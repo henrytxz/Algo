@@ -46,7 +46,7 @@ public class QuickSortTest {
         try {
             List<Integer> list = MyArrayUtil.ListIntegerFromFile(file);
 
-            Integer[] A = MyArrayUtil.ListIntegersToIntegerArray(list);
+            Integer[] A = list.toArray(new Integer[list.size()]);
 
             QuickSort.sortAndCountNumberOfSwaps(A);
 

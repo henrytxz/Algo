@@ -20,7 +20,7 @@ public class QuickTest extends Quick {
         try {
             List<Integer> list = MyArrayUtil.ListIntegerFromFile(file);
 
-            Integer[] A = MyArrayUtil.ListIntegersToIntegerArray(list);
+            Integer[] A = list.toArray(new Integer[list.size()]);
 
             sort(A);
 

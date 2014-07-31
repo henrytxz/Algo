@@ -24,6 +24,12 @@ public class MyArrayUtil {
         System.out.println();
     }
 
+    /**
+     *  @Deprecated because
+     *  Integer[] A = list.toArray(new Integer[list.size()]);
+     *  is better
+     */
+    @Deprecated
     public static Integer[] ListIntegersToIntegerArray(List<Integer> list) {
         Integer[] result = new Integer[list.size()];
         for (int i=0; i<list.size(); i++) {
@@ -72,4 +78,6 @@ public class MyArrayUtil {
         br.close();
         return list;
     }
+
+
 }

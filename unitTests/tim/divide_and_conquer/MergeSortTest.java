@@ -24,7 +24,7 @@ public class MergeSortTest {
         try {
             List<Integer> list = MyArrayUtil.ListIntegerFromFile(file);
 
-            Integer[] A = MyArrayUtil.ListIntegersToIntegerArray(list);
+            Integer[] A = list.toArray(new Integer[list.size()]);
 
             Integer[] result = MergeSort.MergeSort(A, A.length, 0, A.length-1);
 
