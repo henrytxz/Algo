@@ -33,6 +33,20 @@ public class MaxPQ<Key extends Comparable<Key>> {
         }
     }
 
+    protected void sink(int k) {
+        while (2*k<N) {
+            int j = 2 * k;
+            if (a_less_than_b(j, j + 1)) {
+                j++;
+            }
+
+            if (a_less_than_b(k, j)) {
+                exch(k, j);
+                k = j;
+            } else break;
+        }
+    }
+
     private void exch(int parentIndex, int k) {
         Key tmp = pq[parentIndex];
         pq[parentIndex] = pq[k];
@@ -42,4 +56,13 @@ public class MaxPQ<Key extends Comparable<Key>> {
     protected boolean a_less_than_b(int i, int j) {
         return (pq[i].compareTo(pq[j])<0);
     }
+
+    protected void print() {
+        for (Key key : pq) {
+            System.out.print(key + " ");
+        }
+        System.out.println();
+    }
+
+    protected Key[] getPq() {return pq;}
 }
