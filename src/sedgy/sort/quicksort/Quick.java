@@ -1,4 +1,4 @@
-package sedgy.quicksort;
+package sedgy.sort.quicksort;
 
 import edu.princeton.cs.introcs.StdRandom;
 

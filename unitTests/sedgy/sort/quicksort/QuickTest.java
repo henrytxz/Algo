@@ -1,4 +1,4 @@
-package sedgy.quicksort;
+package sedgy.sort.quicksort;
 
 import org.junit.Assert;
 import org.junit.Test;
