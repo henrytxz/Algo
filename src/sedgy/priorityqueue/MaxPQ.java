@@ -65,4 +65,39 @@ public class MaxPQ<Key extends Comparable<Key>> {
     }
 
     protected Key[] getPq() {return pq;}
+
+//    System.arraycopy(a, 0, pq, 0, a.length);
+
+    public void insert(Key x) {
+        if (N+1==pq.length) resize(2*pq.length);
+        pq[++N] = x;
+        swim(N);
+        assert isMaxHeap();
+    }
+
+    protected void resize(int newSize) {
+        Key[] tmp = (Key[]) new Comparable[newSize];
+        System.arraycopy(pq, 0, tmp, 0, pq.length);
+        pq = tmp;
+    }
+
+    /*
+     borrowed from Sedgy
+     is pq[1..N] a max heap?
+    */
+    private boolean isMaxHeap() {
+        return isMaxHeap(1);
+    }
+
+    /*
+     borrowed from Sedgy
+     is subtree of pq[1..N] rooted at k a max heap?
+    */
+    private boolean isMaxHeap(int k) {
+        if (k > N) return true;
+        int left = 2*k, right = 2*k + 1;
+        if (left  <= N && a_less_than_b(k, left))  return false;
+        if (right <= N && a_less_than_b(k, right)) return false;
+        return isMaxHeap(left) && isMaxHeap(right);
+    }
 }

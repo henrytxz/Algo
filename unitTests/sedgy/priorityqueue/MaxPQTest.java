@@ -6,7 +6,7 @@ import org.junit.Test;
 public class MaxPQTest extends MaxPQ {
 
     /*
-        java.lang.Exception: Method test_swim() should not be static
+        java.lang.Exception: Method test_swim() should not be static => why?
     */
     @Test
     public void test_swim() {
@@ -16,6 +16,17 @@ public class MaxPQTest extends MaxPQ {
 
         pq.swim(5);
         Assert.assertEquals("T", pq.max());
+    }
+
+    @Test
+    public void test_insert() {
+        String[] a = {null,"T","P","R","N","H","O","A","E","I","G"};
+        MaxPQ<String> pq = new MaxPQ<String>(a);
+        Assert.assertArrayEquals(a, pq.getPq());
+
+        pq.insert("S");
+        String[] expected = {null,"T","S","R","N","P","O","A","E","I","G","H",null,null,null,null,null,null,null,null,null,null};
+        Assert.assertArrayEquals(expected, pq.getPq());
     }
 
     @Test
