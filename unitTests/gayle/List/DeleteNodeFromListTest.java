@@ -1,5 +1,6 @@
-package gayle;
+package gayle.List;
 
+import gayle.List.DeleteNodeFromList;
 import junit.framework.Assert;
 import leetCode.ListNode;
 import org.junit.Test;
@@ -46,5 +47,12 @@ public class DeleteNodeFromListTest {
         head = DeleteNodeFromList.deleteNode(head, 1);
         ListNode expected = new ListNode(Arrays.asList(3,2,5));
         Assert.assertTrue(expected.equals(head));
+    }
+
+    @Test
+    public void test_deleteNode5() throws Exception {
+        ListNode head = new ListNode(Arrays.asList(1));   //multiple 1s
+        head = DeleteNodeFromList.deleteNode(head, 1);
+        Assert.assertNull(head);
     }
 }
