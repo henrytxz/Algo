@@ -14,7 +14,7 @@ public class DeleteNodeFromList {
             if (n.next.val==val) {
                 n.next = n.next.next;
             }
-            if (n.next==null) break;    //when this is true, n becomes null in the next line, then n.next will fail in the while condition. is there a way to avoid this check?
+            if (n.next==null) break;    //when this is true, n becomes null in the next line, then n.next will fail in the while condition. but is there a more elegant way than this line?
             n = n.next;
         }
         return head;
