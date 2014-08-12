@@ -1,3 +1,7 @@
+package leetCode;
+
+import leetCode.ListNode;
+
 /**
  * Created by henry on 8/2/2014.
 

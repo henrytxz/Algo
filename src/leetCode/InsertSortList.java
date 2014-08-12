@@ -1,3 +1,5 @@
+package leetCode;
+
 /**
  *  12 July 2014: writing the code in an online editor took 44 mins 25 secs
  *  getting

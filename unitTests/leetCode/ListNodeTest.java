@@ -1,8 +1,18 @@
+package leetCode;
+
+import junit.framework.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
 
 public class ListNodeTest {
+
+    @Test
+    public void test_equal() {
+        ListNode n1 = new ListNode(Arrays.asList(1, 2, 3));
+        ListNode n2 = new ListNode(Arrays.asList(1, 2, 3));
+        Assert.assertTrue(n1.equals(n2));
+    }
 
     @Test
     public void test() {
