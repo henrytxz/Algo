@@ -1,6 +1,7 @@
-import leetCode.ListNode;
-import leetCode.SortList;
+package leetCode;
+
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -16,6 +17,7 @@ public class SortListTest extends SortList {
         head.print();
     }
 
+    @Ignore
     @Test
     public void testSort() throws Exception {
         ListNode head0 = new ListNode(Arrays.asList(4, 1));
@@ -35,6 +37,7 @@ public class SortListTest extends SortList {
         System.out.println(foo);
     }
 
+    @Ignore
     @Test
     public void testMerge() throws Exception {
       merge(head,2,2,3);
