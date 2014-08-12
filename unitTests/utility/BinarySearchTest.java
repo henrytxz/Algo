@@ -6,7 +6,7 @@ import org.junit.Test;
 public class BinarySearchTest {
 
     @Test
-    public void testSearch() throws Exception {
+    public void test_search() throws Exception {
         int[] a = new int[] {1,2,3,4,5};
         Assert.assertEquals(0, BinarySearch.search(a, 1));
         Assert.assertEquals(1, BinarySearch.search(a, 2));
