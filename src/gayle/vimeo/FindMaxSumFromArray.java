@@ -1,3 +1,5 @@
+package gayle.vimeo;
+
 import org.junit.Assert;
 
 import java.util.ArrayList;
@@ -8,7 +10,7 @@ import java.util.List;
  * Given an array of integers, find the consecutive sequence with the largest sum
  * What would you like as the output? the sum or the endpoints of the sequence?
  */
-public class FindLargestSumFromArray {
+public class FindMaxSumFromArray {
 
     private static Result calcOnePositiveSum(int i, int[] input) {    //for test case 1, call 1, sum+=input[1]=2, sum+=input[2]=5
         int sum=0;
@@ -28,7 +30,19 @@ public class FindLargestSumFromArray {
         return new Result(i, sum);
     }
 
-    public static int findSum(int[] input) {
+    public static Integer findMaxSum2(int[] a) {
+        if (a==null || a.length==0) return null;
+        Integer max = 0;
+        int curr = 0;
+        for (int i : a) {
+            curr += i;
+            if (curr > max) max = curr;
+            if (curr < 0) curr = 0;
+        }
+        return max;
+    }
+
+    public static int findMaxSum(int[] input) {
 
         List<Integer> chunks = new ArrayList<Integer>();
         int i = 0;
@@ -77,16 +91,16 @@ public class FindLargestSumFromArray {
     public static void main(String[] args) {
 
         int[] a1 = {-1,2,3,-4,-5,6,7};
-        System.out.println(findSum(a1));
-        Assert.assertEquals(13, findSum(a1));
+        System.out.println(findMaxSum(a1));
+        Assert.assertEquals(13, findMaxSum(a1));
 
         int[] a2 = {1,2,-3,4,5,6,-7};
-        System.out.println(findSum(a2));
-        Assert.assertEquals(15, findSum(a2));
+        System.out.println(findMaxSum(a2));
+        Assert.assertEquals(15, findMaxSum(a2));
 
         int[] a3 = {4,5,6,-3,1,2,-7};
-        System.out.println(findSum(a3));
-        Assert.assertEquals(15, findSum(a3));
+        System.out.println(findMaxSum(a3));
+        Assert.assertEquals(15, findMaxSum(a3));
 
         /*
             around 6pm on Aug 8, understood the question a bit better
@@ -95,11 +109,11 @@ public class FindLargestSumFromArray {
             this is a good example, the sequence we want is 3,-2,4 => add up to 5
         */
         int[] a4 = {-1,3,-2,4,-4};
-        System.out.println(findSum(a4));
-        Assert.assertEquals(5, findSum(a4));
+        System.out.println(findMaxSum(a4));
+        Assert.assertEquals(5, findMaxSum(a4));
 
         int[] a5 = {1,-2,3,-4,1};
-        System.out.println(findSum(a5));
-        Assert.assertEquals(3, findSum(a5));
+        System.out.println(findMaxSum(a5));
+        Assert.assertEquals(3, findMaxSum(a5));
     }
 }

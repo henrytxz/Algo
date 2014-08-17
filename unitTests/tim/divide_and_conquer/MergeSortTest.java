@@ -41,16 +41,26 @@ public class MergeSortTest {
 
     @Test
     public void test1() {
+//        Integer[] A = new Integer[]{54044,
+//                            14108,
+//                            79294,
+//                            29649,
+//                            25260,
+//                            60660,
+//                            2995 ,
+//                            53777,
+//                            49689,
+//                            9083};
+
         Integer[] A = new Integer[]{54044,
-                            14108,
-                            79294,
-                            29649,
-                            25260,
-                            60660,
-                            2995 ,
-                            53777,
-                            49689,
-                            9083};
+                79294,
+                29649,
+                25260,
+                60660,
+                2995 ,
+                53777,
+                49689,
+                9083};
 
         Integer[] result = MergeSort.MergeSort(A,A.length,0,A.length-1);
         MyArrayUtil.checkArrayIntegerSorted(result);

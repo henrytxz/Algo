@@ -24,8 +24,8 @@ public class SortListTest extends SortList {
         sort(head0);
         head0.print();
 
-        sort(head);
-        head.print();
+//        sort(head);
+//        head.print();
     }
 
     @Test

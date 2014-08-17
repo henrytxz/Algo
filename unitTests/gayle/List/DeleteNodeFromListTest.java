@@ -1,6 +1,5 @@
-package gayle.List;
+package gayle.list;
 
-import gayle.List.DeleteNodeFromList;
 import junit.framework.Assert;
 import leetCode.ListNode;
 import org.junit.Test;

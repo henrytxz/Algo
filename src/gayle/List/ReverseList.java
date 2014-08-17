@@ -1,4 +1,4 @@
-package gayle.List;
+package gayle.list;
 
 import leetCode.ListNode;
 import utility.Pair;

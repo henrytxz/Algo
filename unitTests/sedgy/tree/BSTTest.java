@@ -18,7 +18,7 @@ public class BSTTest {
 //            st.put(testCase[i], i);
 //        }
 //
-//        List<String> result = new ArrayList<String>();
+//        list<String> result = new ArrayList<String>();
 //
 //        for (String s : st.keys())
 //            result.add(s);
