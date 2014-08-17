@@ -2,9 +2,6 @@ package gayle.vimeo;
 
 import org.junit.Assert;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by henry on 8/8/2014.
  * Given an array of integers, find the consecutive sequence with the largest sum
@@ -30,7 +27,7 @@ public class FindMaxSumFromArray {
         return new Result(i, sum);
     }
 
-    public static Integer findMaxSum2(int[] a) {
+    public static Integer findMaxSum(int[] a) {
         if (a==null || a.length==0) return null;
         Integer max = 0;
         int curr = 0;
@@ -39,34 +36,6 @@ public class FindMaxSumFromArray {
             if (curr > max) max = curr;
             if (curr < 0) curr = 0;
         }
-        return max;
-    }
-
-    public static int findMaxSum(int[] input) {
-
-        List<Integer> chunks = new ArrayList<Integer>();
-        int i = 0;
-        while (input[i]<0) i++;
-        while (i<input.length) {
-            Result result;
-            if (input[i]>=0) {
-                result = calcOnePositiveSum(i, input);
-            } else {
-                result = calcOneNegativeSum(i, input);
-            }
-            chunks.add(result.sum);
-            i = result.i;
-        }
-
-        int max = 0;
-        int j=0;
-        Result result;
-        while (j<input.length) {
-            result = calcOnePositiveSum(j, input);
-            j = result.i;
-            if (result.sum > max) max = result.sum;
-        }
-
         return max;
     }
 
@@ -92,15 +61,15 @@ public class FindMaxSumFromArray {
 
         int[] a1 = {-1,2,3,-4,-5,6,7};
         System.out.println(findMaxSum(a1));
-        Assert.assertEquals(13, findMaxSum(a1));
+        Assert.assertEquals(13, findMaxSum(a1).intValue());
 
         int[] a2 = {1,2,-3,4,5,6,-7};
         System.out.println(findMaxSum(a2));
-        Assert.assertEquals(15, findMaxSum(a2));
+        Assert.assertEquals(15, findMaxSum(a2).intValue());
 
         int[] a3 = {4,5,6,-3,1,2,-7};
         System.out.println(findMaxSum(a3));
-        Assert.assertEquals(15, findMaxSum(a3));
+        Assert.assertEquals(15, findMaxSum(a3).intValue());
 
         /*
             around 6pm on Aug 8, understood the question a bit better
@@ -110,10 +79,10 @@ public class FindMaxSumFromArray {
         */
         int[] a4 = {-1,3,-2,4,-4};
         System.out.println(findMaxSum(a4));
-        Assert.assertEquals(5, findMaxSum(a4));
+        Assert.assertEquals(5, findMaxSum(a4).intValue());
 
         int[] a5 = {1,-2,3,-4,1};
         System.out.println(findMaxSum(a5));
-        Assert.assertEquals(3, findMaxSum(a5));
+        Assert.assertEquals(3, findMaxSum(a5).intValue());
     }
 }
