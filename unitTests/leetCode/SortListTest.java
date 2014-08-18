@@ -21,7 +21,7 @@ public class SortListTest extends SortList {
     @Test
     public void testSort() throws Exception {
         ListNode head0 = new ListNode(Arrays.asList(4, 1));
-        sort(head0);
+        head0 = sort(head0);
         head0.print();
 
 //        sort(head);
@@ -40,8 +40,21 @@ public class SortListTest extends SortList {
     @Ignore
     @Test
     public void testMerge() throws Exception {
-      merge(head,2,2,3);
+        head = new ListNode(Arrays.asList(4,1));
+        head = merge(head,0,0,1);
+        head.print();
+
+        head = new ListNode(Arrays.asList(4,1,3,2));
+        head = merge(head,2,2,3);
+        head.print();
+
+
+//      merge(head,2,2,3);
 //      merge(head,0,0,1);
-      head.print();
+//      head = new ListNode(Arrays.asList(1, 4, 2, 3));
+//      head = merge(head,0,1,3);
+//      head.print();
+
+
     }
 }
