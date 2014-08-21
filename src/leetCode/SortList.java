@@ -16,75 +16,47 @@ package leetCode;
  */
 public class SortList {
     public static ListNode sort(ListNode head) {
-        int length = 0;
-        ListNode it = head;
-        while (it!=null) {
-            length++;
-            it = it.next;
-        }    //for test case 1: 4, 1, 3, 2 => length = 4
-        return sort(head, 0, length-1);
-    }
+        if (head==null || head.next==null) return head;
+        ListNode beforeSlow = head;
+        ListNode slow = head.next;
+        ListNode fast = head.next.next;
 
-    private static ListNode sort(ListNode head, int lo, int hi)    //what would sort(head, 0, 1) do?    what would sort(head, 0, 2) do?    sort(head, 0, 3)    sort(head, 0, 4)
-    {
-        if (lo >= hi) return null;
-        int mid = (lo+hi)/2;                //sort(head, 0, 1) => mid = 0                    mid=1                              mid = 1             mid = 2
-        head = sort(head, lo, mid);                //sort(head, 0, 0)                               sort(head, 0, 1)                   sort(head, 0, 1)    sort(head, 0, 2)
-        head = sort(head, mid+1, hi);              //sort(head, 1, 1)                               sort(head, 2, 2)                   sort(head, 2, 3)    sort(head, 3, 4)
-        return merge(head, lo, mid, hi);
-    }
-
-    protected static ListNode merge(ListNode head, int lo, int mid, int hi)    //merge(0, 0, 1)
-    {
-        assert lo <= mid;
-        assert mid <= hi;
-        if (lo >= hi) return head;  //todo is null the right thing to return when method is not void?
-        ListNode beforeLoNode = head;
-        ListNode jNode = head;
-        ListNode hiNode = head;
-        for (int i=0; i<lo-1; i++) {	beforeLoNode = beforeLoNode.next; }
-        ListNode iNode = beforeLoNode.next;
-        if (lo==0) iNode = head; //special case
-        for (int i=0; i<mid+1; i++) {	jNode = jNode.next; }
-        for (int i=0; i<hi; i++) {	hiNode = hiNode.next; }
-        ListNode afterHiNode = hiNode.next;
-        ListNode result = new ListNode(0);
-        ListNode resultHead = result;
-
-        int iSteps = 0;
-        int jSteps = 0;
-        int lhTotal = mid-(lo-1);
-        int rhTotal = hi-(mid+1-1);
-        while (iSteps < lhTotal || jSteps < rhTotal) {
-            if (iSteps == lhTotal) {
-                result.next = jNode;
-                jNode = jNode.next;
-                jSteps++;
-            } else if (jSteps == rhTotal) {
-                result.next = iNode;
-                iNode = iNode.next;
-                iSteps++;
-            } else if (iNode.val < jNode.val) {
-                result.next = iNode;
-                iNode = iNode.next;
-                iSteps++;
-            } else {
-                result.next = jNode;
-                jNode = jNode.next;
-                jSteps++;
-            }
-            result = result.next;
+        while (true) {										//could have said while(fast!=null&&fast.next!=null)
+            if (fast==null || fast.next==null) break;
+            beforeSlow = beforeSlow.next;
+            slow = slow.next;
+            fast = fast.next.next;
         }
+        beforeSlow.next = null;
 
-        result.next = afterHiNode;
+        ListNode left  = sort(head);
+        ListNode right = sort(slow);
+        return merge(left, right);
+    }
 
-//        if (lo==0) {
-//            head.val = resultHead.next.val;
-//            head.next = resultHead.next.next;
-            return resultHead.next;
-//        }
-//        else beforeLoNode.next = resultHead.next;
+    private static ListNode merge(ListNode left, ListNode right) {
 
-//        return null;    //todo
+        ListNode result = new ListNode(0);
+        ListNode itr = result;
+        while (left!=null||right!=null) {
+            if (left==null) {
+                itr.next = right;
+                right = null;
+            } else if (right==null) {
+                itr.next = left;
+                left = null;
+            } else if (left.val <= right.val) {
+                itr.next = left;
+                itr = itr.next;
+                left = left.next;
+                itr.next = null;	//so itr is as expected in each iteration
+            } else {
+                itr.next = right;
+                itr = itr.next;
+                right = right.next;
+                itr.next = null;
+            }
+        }
+        return result.next;
     }
 }

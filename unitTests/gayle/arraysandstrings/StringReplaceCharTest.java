@@ -7,6 +7,10 @@ import java.util.Arrays;
 
 public class StringReplaceCharTest {
 
+    /*
+        test case: s tri ng$$$$ (I'm using $ instead of null)
+        output:    s%20tri%20ng
+     */
     @Test
     public void testReplace() throws Exception {
         char[] a_ = new char[]{'s',' ','t','r','i',' ','n','g'};

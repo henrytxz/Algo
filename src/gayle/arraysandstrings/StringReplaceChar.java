@@ -2,6 +2,7 @@ package gayle.arraysandstrings;
 
 /**
  * Created by henry on 8/17/2014.
+ * question 1.4
  */
 public class StringReplaceChar {
     public static String replace(String s, int nonNullChars) {
