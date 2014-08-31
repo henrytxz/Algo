@@ -2,7 +2,8 @@ package gayle.treesandgraphs;
 
 /**
  * Created by henry on 8/20/2014.
- * find the first common ancestor of two nodes in a binary tree
+ * Question 4.7 on p86
+ * Find the first common ancestor of two nodes in a binary tree
  * Avoid storing additional nodes in a data structure
  */
 public class BinaryTreeCommonAncestor {

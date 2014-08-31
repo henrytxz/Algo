@@ -16,7 +16,8 @@ public class BinaryTreeCommonAncestorTest {
         c.left = new Node(0);
         c.right = new Node(1);
 
-        Node result = BinaryTreeCommonAncestor.find(a, 1, 2);
+        Node result = BinaryTreeCommonAncestor.find(a, 1, -1);
+
         System.out.println(result);
     }
 }

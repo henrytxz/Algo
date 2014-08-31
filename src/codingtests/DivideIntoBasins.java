@@ -1,8 +1,8 @@
 package codingtests;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,24 +14,36 @@ public class DivideIntoBasins {
 
     private int dimension;
     private int[][] m;
+    private boolean mIsSet;
     private UF uf;
 
     public DivideIntoBasins(int dimension) {
         this.dimension = dimension;
         m = new int[dimension][dimension];
+        mIsSet = false;
         uf = new UF(dimension);
     }
+
+    public DivideIntoBasins(int dimension, int[][] m) {
+        this.dimension = dimension;
+        this.m = m;
+        mIsSet = true;
+        uf = new UF(dimension);
+    }
+
     public List<Integer> countBasins(BufferedReader br) throws IOException
     {
         String line;
         int row = 0;
 
-        while ((line = br.readLine()) != null) {
-            String[] a = line.split(" ");
-            for (int j=0; j<dimension; j++) {
-                m[row][j] = Integer.parseInt(a[j]);
+        if (!mIsSet) {
+            while ((line = br.readLine()) != null) {
+                String[] a = line.split(" ");
+                for (int j = 0; j < dimension; j++) {
+                    m[row][j] = Integer.parseInt(a[j]);
+                }
+                row++;
             }
-            row++;
         }
 
         for (int i=0; i<dimension; i++) {
@@ -73,18 +85,37 @@ public class DivideIntoBasins {
     }
 
     public static void main(String[] args) throws IOException {
-        if (args.length==0) throw new IllegalArgumentException("no file was provided");
-        BufferedReader br = new BufferedReader(new FileReader(args[0]));
+
+        System.out.println("Welcome, brave warrior, what's the dimension?");
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String s;
         int dimension;
-        String line = br.readLine();
-        if (line!=null) {
-            dimension = Integer.parseInt(line);
+
+        s = br.readLine();
+        if (s!=null) {
+            dimension = Integer.parseInt(s);
         } else {
-            throw new IllegalArgumentException("no dimension found in file:"+args[0]);
+            throw new IllegalArgumentException("expect dimension right off the bat");
         }
 
-        DivideIntoBasins s = new DivideIntoBasins(dimension);
-        System.out.println(s.countBasins(br));
+        int row = 0;
+        int[][] m = new int[dimension][dimension];
+
+        System.out.println("What's the next row?");
+        while ((s=br.readLine())!=null && s.length()!=0) {
+            String[] a = s.split(" ");
+            for (int j = 0; j < dimension; j++) {
+                m[row][j] = Integer.parseInt(a[j]);
+            }
+            row++;
+        }
+
+        DivideIntoBasins solution = new DivideIntoBasins(dimension, m);
+        List<Integer> result = solution.countBasins(br);
+        for (int size : result) {
+            System.out.print(size + " ");
+        }
     }
 
     // weighted union-find + path compression (learned but not copied from Robert Sedgewick algo class)

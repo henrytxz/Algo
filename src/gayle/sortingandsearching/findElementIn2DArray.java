@@ -3,7 +3,7 @@ package gayle.sortingandsearching;
 /**
  * Created by henry on 8/19/2014.
  */
-public class findElementIn2DArray {
+public class FindElementIn2DArray {
     public static boolean find(int[][] a, int x) {
         if (a==null||a.length==0||a[0].length==0) return false;
         int i=0;
