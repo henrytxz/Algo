@@ -13,7 +13,7 @@ import java.util.List;
 public class Graph {
     private int V;
     private int E;
-    private List<Integer>[] adj;
+    private List<Integer>[] adj;    //todo make this an ArrayList so the graph can grow
 
     @SuppressWarnings("unchecked")
     public Graph(int V) {

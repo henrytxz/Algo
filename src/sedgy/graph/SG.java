@@ -15,7 +15,7 @@ public class SG {
     // look up index given key
     private Map<String, Integer> st;    //todo let's make this a generic class
 
-    private String[] names;
+    private String[] names; // this will need to be a map if the SymbolGraph can grow
     private Graph G;
 
     public SG(String fileName, String delimiter) throws FileNotFoundException {

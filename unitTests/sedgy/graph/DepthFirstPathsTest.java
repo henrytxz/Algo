@@ -9,6 +9,8 @@ import java.io.FileNotFoundException;
 public class DepthFirstPathsTest {
 
     DepthFirstPaths depthFirstPaths;
+    SG sg;
+//    SymbolGraph sg;
 
     @Before
     public void setup() throws FileNotFoundException {
@@ -16,18 +18,25 @@ public class DepthFirstPathsTest {
         String delimiter = " ";
         String s = "NYC";
 
-        SG sg = new SG(fileName, delimiter);
+        sg = new SG(fileName, delimiter);
+//        sg = new SymbolGraph(fileName, delimiter);
 
-        depthFirstPaths = new DepthFirstPaths(sg, s);
+        depthFirstPaths = new DepthFirstPaths(sg.G(), sg.index(s));
     }
 
     @Test
     public void testHasPathTo() {
-        Assert.assertTrue(depthFirstPaths.hasPathTo("London"));
+        Assert.assertTrue(depthFirstPaths.hasPathTo(sg.index("London")));
     }
 
     @Test
     public void testPathTo() {
-        System.out.println(depthFirstPaths.pathTo("London"));
+        Iterable<Integer> path = depthFirstPaths.pathTo(sg.index("London"));
+        StringBuilder sb = new StringBuilder();
+        for (Integer i : path) {
+            sb.append(sg.name(i));
+            sb.append(" ");
+        }
+        Assert.assertEquals("NYC Barcelona Paris London", sb.toString().trim());
     }
 }
