@@ -4,41 +4,39 @@ import utility.In;
 
 import java.io.FileNotFoundException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by henry on 8/31/2014.
  * SG is short for SymbolGraph
  */
 public class SG {
+
+    // look up index given key
     private Map<String, Integer> st;    //todo let's make this a generic class
+
     private String[] names;
     private Graph G;
 
     public SG(String fileName, String delimiter) throws FileNotFoundException {
         In in = new In(fileName);
-        Set<String> vertices = new HashSet<String>();
         st = new HashMap<String, Integer>();
 
         while (!in.isEmpty()) {
-            String[] v = in.readLine().split(delimiter);
-            for (int i=0; i<v.length; i++)
-            {
-                if (!vertices.contains(v[i])) {
-                    vertices.add(v[i]);
-                    st.put(v[i], st.size());
+            String[] vertices = in.readLine().split(delimiter);
+            for (String v : vertices) {
+                if (!st.containsKey(v)) {
+                    st.put(v, st.size());
                 }
             }
         }
 
-        names = new String[vertices.size()];
+        names = new String[st.size()];
         for (Map.Entry<String, Integer> entry : st.entrySet()) {
             names[entry.getValue()] = entry.getKey();
         }
 
-        G = new Graph(vertices.size());
+        G = new Graph(st.size());
 
         in = new In(fileName);
         while (!in.isEmpty()) {
@@ -80,11 +78,5 @@ public class SG {
         } catch (FileNotFoundException e) {
             System.out.println("file:"+filename+" not found, please check.");
         }
-//        while (StdIn.hasNextLine())
-//        {
-//            String source = StdIn.readLine();
-//            for (int w : G.adj(sg.index(source)))
-//                StdOut.println(" " + sg.name(w));
-//        }
     }
 }
