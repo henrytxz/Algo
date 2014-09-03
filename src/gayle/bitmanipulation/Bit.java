@@ -56,6 +56,10 @@ public class Bit {
     }
 
     public static boolean isPowerOfTwo(int x) {
+        return (x & (x-1))==0;
+    }
+
+    public static boolean myIsPowerOfTwo(int x) {
         if (getBit(x, 0)) return false;
 
         int count=0;

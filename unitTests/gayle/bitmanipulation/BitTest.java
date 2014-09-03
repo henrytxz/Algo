@@ -13,9 +13,14 @@ public class BitTest {
     @Test
     public void testIsPowerOfTwo() {
         int x = 8;
+        int y = 9;
         boolean isPowerOfTwo = Bit.isPowerOfTwo(x);
         Assert.assertEquals(true, isPowerOfTwo);
         Assert.assertEquals(8, x);
+        Assert.assertEquals(false, Bit.isPowerOfTwo(y));
+
+        Assert.assertEquals(true, Bit.myIsPowerOfTwo(x));
+        Assert.assertEquals(false, Bit.myIsPowerOfTwo(y));
     }
 
     @Test
