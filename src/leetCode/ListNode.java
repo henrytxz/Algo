@@ -15,6 +15,20 @@ public class ListNode {
         next = null;
     }
 
+    public ListNode(int[] a) {
+        if (a.length==0) {
+            val = Integer.MIN_VALUE;
+            return;
+        }
+
+        this.val = a[0];
+        ListNode current = this;
+        for (int i=1; i<a.length; i++) {
+            current.next = new ListNode(a[i]);
+            current = current.next;
+        }
+    }
+
     public ListNode(List<Integer> integers) {
         if (integers.size()==0)
             return;
@@ -49,9 +63,24 @@ public class ListNode {
         ListNode nxt = this.next;
         while (nxt!=null) {
             System.out.print(nxt.val);
-            System.out.print("-");
+            if (nxt.next!=null)
+                System.out.print("-");
             nxt = nxt.next;
         }
         System.out.println();
+    }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(val);
+        sb.append("-");
+        ListNode nxt = this.next;
+        while (nxt!=null) {
+            sb.append(nxt.val);
+            if (nxt.next!=null)
+                sb.append("-");
+            nxt = nxt.next;
+        }
+        return sb.toString();
     }
 }
