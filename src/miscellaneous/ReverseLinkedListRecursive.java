@@ -7,11 +7,6 @@ import leetCode.ListNode;
  */
 public class ReverseLinkedListRecursive {
     public static ListNode reverse(ListNode head) {
-//        if (head==null || head.next==null) return head;
-//        ListNode n2 = head.next;
-//        ListNode rest = recursiveReverse(n2);
-//        n2.next
-
         ListNode reverse = recursiveReverse(head);
         head.next = null;
         return reverse;

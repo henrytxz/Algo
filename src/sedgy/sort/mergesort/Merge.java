@@ -18,8 +18,8 @@ public class Merge {
     }
 
     protected static void merge(Comparable[] a, Comparable[] b, int lo, int mid, int hi) {
-//        assert isSorted(a, lo, mid);
-//        assert isSorted(a, mid+1, hi);
+        assert isSortedAscendingOrder(a, lo, mid);
+        assert isSortedAscendingOrder(a, mid + 1, hi);
 //        b = Arrays.copyof(a, a.length);     // Java generics
         for (int m=0; m<a.length; m++) {
             b[m] = a[m];
@@ -39,6 +39,14 @@ public class Merge {
             }
             i++;
         }
-//        assert isSorted(a, lo, hi);
+        assert isSortedAscendingOrder(a, lo, hi);
+    }
+
+    private static boolean isSortedAscendingOrder(Comparable[] a, int lo, int hi) {
+        for (int i=lo; i<hi; i++) {
+            if (a[i].compareTo(a[i+1])>0)
+                return false;
+        }
+        return true;
     }
 }
