@@ -16,7 +16,10 @@ public class ReverseLinkedListIterative {
         head.next = null;
         while (true) {
             n2.next = n1;
-            if (n3==null) return n2;
+            if (n3==null) {
+                System.out.println("reversed list is "+n2);
+                return n2;
+            }
             n1 = n2;
             n2 = n3;
             n3 = n3.next;
