@@ -8,6 +8,7 @@ import java.util.Arrays;
 public class MergeSept3 {
     public static void sort(int[] a)    //todo: try an array of Generics
     {
+        if (a==null || a.length<2) return;
         int[] aux = Arrays.copyOf(a, a.length);
         ms(a, aux, 0, a.length-1);
     }
@@ -25,16 +26,12 @@ public class MergeSept3 {
         assert isSortedAscendingOrder(a, mid+1, hi);
         int i = lo;
         int j = mid+1;
-        int k = i;
-        while (true) {
-            if (i>mid && j>hi) break;
-            else if (i>mid) a[k] = aux[j++];
-            else if (j>hi)  a[k] = aux[i++];
-            else {
-                if (aux[i]<=aux[j]) a[k] = aux[i++];
-                else a[k] = aux[j++];
-            }
-            k++;
+
+        for (int k=lo; k<=hi; k++) {
+            if (i>mid)                  a[k] = aux[j++];
+            else if (j>hi)              a[k] = aux[i++];
+            else if (aux[i]<=aux[j])    a[k] = aux[i++];
+            else                        a[k] = aux[j++];
         }
 
         System.arraycopy(a, 0, aux, 0, a.length);
