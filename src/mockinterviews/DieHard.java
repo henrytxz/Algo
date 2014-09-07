@@ -7,26 +7,24 @@ import java.util.*;
  */
 public class DieHard {
 
+    private int[] cupSizes;
+
+    private Map<State, Boolean> oldStates;
+    private List<Stack<State>> goodPaths;
+    private State doneState;
+
     public static void main(String[] args) {
         //...
 
 //        DieHard dh = new DieHard(4, new int[]{3,5});
-        DieHard dh = new DieHard(4, new int[]{1});
-        System.out.println(dh.getGoodPaths().get(0));
+        DieHard dh = new DieHard(4, new int[]{1,5});
+        System.out.println(dh.getGoodPaths());
     }
 
-    private int[] cupSizes;
-    //private int[] state;
-    private Map<State, Boolean> oldStates;
-//    private Map<State, Stack<State>> paths;
-    private List<Stack<State>> goodPaths;
-    private State doneState;
-
-    public List<Stack<State>> getGoodPaths() { return goodPaths; }
+    public DieHard() {}
 
     public DieHard(int goal, int[] cupSizes) {
         this.cupSizes = cupSizes;
-        //this.state = new int[cupSizes.length];
         oldStates = new HashMap<State, Boolean>();
         goodPaths = new LinkedList<Stack<State>>();
 
@@ -36,11 +34,60 @@ public class DieHard {
         recurse(doneState, path);
     }
 
+    private void recurse(State s, Stack<State> path) {
+        System.out.println("recursing on "+s);
+        if (!oldStates.containsKey(s)) {
+            oldStates.put(s, true);
+            if (s.isGood()) {
+                path.push(doneState);
+                goodPaths.add(path);
+            }
+
+            List<State> possibleStates = getPossibleStates(s);
+            for (State i : possibleStates) {
+                if (isReversible(s, i)) {
+                    recurse(i, path);
+                }
+            }
+        }
+    }
+
+    protected List<State> getPossibleStates(State fromState) {
+        List<State> result = new LinkedList<State>();
+        int[] a = fromState.get();
+        for (int i=0; i<a.length; i++) {
+            if (a[i]!=0) {
+                State toState = new State(empty(a, i));
+                if (!oldStates.containsKey(toState)) { result.add(toState);                     //&&isReversible(fromState, toState)
+//                    System.out.println("going from "+fromState.print()+" to "+toState.print());
+                }
+            }
+            if (a[i]!=cupSizes[i]) {
+                State toState = new State(fill(a, i));
+                if (!oldStates.containsKey(toState)) { result.add(toState); }
+            }
+            for (int j=0; j<a.length&&j!=i; j++) {
+                if (a[i]!=0&&a[j]!=cupSizes[j]) {
+                    State toState = new State(pour(a,i,j));
+                    if (!oldStates.containsKey(toState)) { result.add(toState); }
+                }
+            }
+        }
+        return result;
+    }
+
+
+
+
     //todo: hard-coding for now
     private State figureOutDoneState(int goal) {
 //        return new State(new int[]{3,1});
-        return new State(new int[]{4});
+        State hardCoding = new State(new int[]{0,4});
+        assert hardCoding.get().length == cupSizes.length;
+        return hardCoding;
     }
+
+    public List<Stack<State>> getGoodPaths() { return goodPaths; }
 
 
     private int[] fill(int[] state, int cup) {
@@ -71,32 +118,10 @@ public class DieHard {
         return result;
     }
 
-    private List<State> getPossibleStates(State fromState) {
-        List<State> result = new LinkedList<State>();
-        int[] a = fromState.get();
-        for (int i=0; i<a.length; i++) {
-            if (a[i]!=0) {
-                State toState = new State(empty(a, i));
-                if (isReversible(fromState, toState)) { result.add(toState);
-//                    System.out.println("going from "+fromState.print()+" to "+toState.print());
-                }
-            }
-            if (a[i]!=cupSizes[i]) {
-                State toState = new State(fill(a, i));
-                if (isReversible(fromState, toState)) { result.add(toState); }
-            }
-            for (int j=0; j<a.length&&j!=i; j++) {
-                if (a[i]!=0&&a[j]!=cupSizes[i]) {
-                    State toState = new State(pour(a,i,j));
-                    if (isReversible(fromState, toState)) { result.add(toState); }
-                }
-            }
-        }
-        return result;
-    }
-
     private boolean isReversible(State fromState, State toState) {
-        return getPossibleStates(toState).contains(fromState);
+        List<State> possibleStates = getPossibleStates(toState);
+        boolean reversable = possibleStates.contains(fromState);
+        return reversable;
     }
 
 //    private class Move {
@@ -107,24 +132,16 @@ public class DieHard {
 //        }
 //    }
 
-    private class State {
+    protected State makeAState(int[] state) { return new State(state); }
+
+    protected class State {
         private int[] state;
-//        private State done;
 
         private State(int[] state) {
             assert state.length == cupSizes.length;
             this.state = state;
-
-//            int[] a = new int[cupSizes.length];
-//            for (int i=0; i<a.length; i++) {
-//                a[i] = 0;
-//            }
-//            done = new State(a);
         }
         private int[] get() { return state; }
-//        private State getDoneState() {
-//            return done;
-//        }
 
         private boolean isGood() {
             for (int volume : state) {
@@ -132,7 +149,22 @@ public class DieHard {
             }
             return true;
         }
-        private String print() { return Arrays.toString(state); }
+        public boolean equals(Object obj) {
+            if (this == obj) return true;
+            else if (!(obj instanceof State)) { return false; }
+            else {
+                State that = (State) obj;
+                return Arrays.equals(state, that.get());
+            }
+        }
+        public int hashCode() {
+            int result = 0;
+            for (int i=0; i<state.length; i++) {
+                result += state[i]+Math.pow(7,i);
+            }
+            return result;
+        }
+        public String toString() { return Arrays.toString(state); }
     }
 
     /*
@@ -142,6 +174,7 @@ public class DieHard {
         and the state before, is probably when one of the cups is empty...
         so the state before is s.t. goal-state.totalVolume == x, y or z
     */
+
 //    public Stack<State> try() {
 //        //current state
 //        int[] curr = new int[]{0,4};
@@ -152,19 +185,4 @@ public class DieHard {
 //        //from a state, you can fill either cup, empty either cup or pour from one to another
 //        recurse(cState);
 //    }
-
-    private void recurse(State s, Stack<State> path) {
-        if (!oldStates.containsKey(s)) {
-            if (s.isGood()) {
-//                Stack<State> path = paths.get(s);
-                path.push(doneState);
-                goodPaths.add(path);
-            }
-
-            for (State i : getPossibleStates(s)) {
-                oldStates.put(i, true);
-                recurse(i, path);
-            }
-        }
-    }
 }
