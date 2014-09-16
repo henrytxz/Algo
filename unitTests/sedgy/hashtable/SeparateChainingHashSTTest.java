@@ -12,6 +12,8 @@ public class SeparateChainingHashSTTest extends TestCase {
         hashTable.put(2, "hello!");
         hashTable.put(3, "hi!");
         Assert.assertEquals("hi!", hashTable.get(3));
+
+        Assert.assertNull(hashTable.get(4));
     }
 
 

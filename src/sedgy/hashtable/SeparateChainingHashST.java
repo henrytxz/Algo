@@ -24,19 +24,12 @@ public class SeparateChainingHashST<Key, Value> {
 
     public Value get(Key key) {
         int index = hash(key);
-        if (nodes[index]==null) {
-            return null;
-        } else {
-            Node node = nodes[index];
-            while (node!=null) {
-                if (node.key.equals(key)) {
-                    return (Value) node.val;
-                } else {
-                    node = node.next;
-                }
-            }
-            return null;
+        Node n = nodes[index];
+        while (n!=null) {
+            if (n.key.equals(key)) return (Value) n.val;
+            n = n.next;
         }
+        return null;
     }
 
     private int hash(Key key) { return key.hashCode(); }

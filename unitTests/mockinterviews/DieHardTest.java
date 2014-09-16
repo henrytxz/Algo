@@ -30,7 +30,7 @@ public class DieHardTest extends DieHard {
     @Test
     public void test() throws Exception {
         DieHard dh = new DieHard(2, new int[]{1,3});
-        System.out.println(dh.getGoodPaths());
+        dh.printGoodPaths();
     }
 
     @Test

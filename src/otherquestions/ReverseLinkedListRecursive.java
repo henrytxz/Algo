@@ -1,4 +1,4 @@
-package miscellaneous;
+package otherquestions;
 
 import leetCode.ListNode;
 

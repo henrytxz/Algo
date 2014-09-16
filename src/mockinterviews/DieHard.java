@@ -18,7 +18,7 @@ public class DieHard {
 
 //        DieHard dh = new DieHard(4, new int[]{3,5});
         DieHard dh = new DieHard(4, new int[]{1,5});
-        System.out.println(dh.getGoodPaths());
+//        System.out.println(dh.getGoodPaths());
     }
 
     public DieHard() {}
@@ -94,8 +94,12 @@ public class DieHard {
         return hardCoding;
     }
 
-    public List<Stack<State>> getGoodPaths() {
-        return goodPaths;
+    public void printGoodPaths() {
+        int i=1;
+        for (Stack<State> path : goodPaths) {
+            System.out.println("path "+i+":");
+            while (!path.empty()) System.out.println(path.pop());
+        }
     }
 
 

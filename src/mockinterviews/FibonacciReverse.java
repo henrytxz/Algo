@@ -27,11 +27,14 @@ public class FibonacciReverse {
         a = new int[numberTerms];
     }
 
-    public void print() {
-        for (int i=a.length; i!=0; i--) {
+    private void print(int i) {
+        if (i>0) {
             System.out.println(fib(i-1));
+            print(i-1);
         }
     }
+
+    public void print() { print(a.length); }
 
     public static void main(String[] args) {
         FibonacciReverse f = new FibonacciReverse(7);
