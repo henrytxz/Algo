@@ -1,11 +1,11 @@
-package mockinterviews;
+package interviews;
 
 /**
  * Created by henry on 9/14/2014.
- * goal: print fibonacci numbers
+ * goal: print fibonacci numbers in reverse order
  * constraints: do not use a loop
  */
-public class Fibonacci {
+public class FibonacciReverse {
     private int[] a;
 
     private int fib(int i) {
@@ -17,23 +17,27 @@ public class Fibonacci {
             } else {
                 a[i] = fib(i - 2) + fib(i - 1);
             }
-            System.out.println(a[i]);
         }
 
         return a[i];
     }
 
-    public Fibonacci(int numberTerms) {
+    public FibonacciReverse(int numberTerms) {
         if (numberTerms<2) throw new IllegalArgumentException("expect at least 2 terms for a Fibonacci sequence");
         a = new int[numberTerms];
     }
 
-    public void print() {
-        fib(a.length-1);
+    private void print(int i) {
+        if (i>0) {
+            System.out.println(fib(i-1));
+            print(i-1);
+        }
     }
 
+    public void print() { print(a.length); }
+
     public static void main(String[] args) {
-        Fibonacci f = new Fibonacci(7);
+        FibonacciReverse f = new FibonacciReverse(7);
         f.print();
     }
 }
