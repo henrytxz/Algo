@@ -11,47 +11,34 @@ public class Quick {
 //    static Logger logger = LoggerFactory.getLogger(Quick.class);  todo
 //    java.util.logging.Logger logger =
     public static void sort(Comparable[] a) {
+        if (a==null) return;
         StdRandom.shuffle(a);
         sort(a, 0, a.length-1);
     }
 
     protected static void sort(Comparable[] a, int lo, int hi) {
-        if (lo>=hi) {
-//            logger.info("lo:"+Integer.toString(lo)+", hi:"+Integer.toString(hi));
-            return;
-        }
+        if (lo>=hi) return;
         int i = partition(a, lo, hi);
-//        System.out.println("post partition");
-//        printArray(a);
-        sort(a, lo, i - 1);
-        sort(a, i + 1, hi);
+        sort(a, lo, i);
+        sort(a, i+1, hi);
     }
 
     protected static int partition(Comparable[] a, int lo, int hi) {
-//        System.out.println("in partition");
-//        printArray(a);
-//        System.out.println("lo:"+Integer.toString(lo)+", hi:"+Integer.toString(hi));
-        assert hi <= a.length-1;
-        Comparable pivot = a[lo];
-        int i = lo+1;
-        int j = hi;
+        int i=lo;
+        int j=hi+1;
         while (true) {
-            while (less(a[i], pivot)) {
+            while (less(a[++i], a[lo])) {
                 if (i==hi) break;
-                i++;
             }
-            while (more(a[j],pivot)) {
+            while (more(a[--j], a[lo])) {
                 if (j==lo) break;
-                j--;
             }
-
-            if (i>=j) {
-                exch(a, lo, j);
-                return j;
-            } else {
-                exch(a, i, j);
-            }
+//            System.out.println("i:"+i+", j:"+j);
+            if (i>=j) break;
+            exch(a, i, j);
         }
+        exch(a, lo, j);
+        return j;
     }
 
     protected static void exch(Comparable[] a, int i, int j) {

@@ -79,7 +79,7 @@ public class Sudoku {
         {
             for (int baseCol = 0; baseCol < size; baseCol += subSquareSize)
             {
-                if (!checkSquare(grid, baseRow, baseCol, subSquareSize))
+                if (!checkSquare(grid, baseRow, baseCol))
                 {
                     return false;
                 }
@@ -191,48 +191,20 @@ public class Sudoku {
         return true;
     }
 
-    /**
-     * Checks whether a square subarray contains duplicate values.
-     * Returns true if the subSquareSize x subSquareSize subarray of grid,
-     * with upper left corner at [baseRow, baseCol], does not contain
-     * any duplicate values.
-     * Preconditions:
-     *   baseRow + subSquareSize <= number of columns in grid
-     *   baseCol + subSquareSize <= number of rows in grid.
-     *   all values in grid are between 1 and grid.length, inclusive
-     *
-     * @param grid
-     *   the 2D array to check
-     * @param baseRow
-     *   topmost row of the square
-     * @param baseCol
-     *   leftmost column of the square
-     * @param subSquareSize
-     *   the size of the subsquare to be checked
-     * @return
-     *   true if the square contains no duplicates, false otherwise
+    /*
+        this is my code from https://code.stypi.com/henrytxz/chat%20with%20Dwijen.java
      */
-    private static boolean checkSquare(int[][] grid, int baseRow, int baseCol, int subSquareSize)
+    private static boolean checkSquare(int[][] grid, int i, int j)
     {
-        boolean[] found = new boolean[grid.length];
-        for (int row = baseRow; row < (baseRow + subSquareSize); ++row)
-        {
-            for (int col = baseCol; col < (baseCol + subSquareSize); ++col)
-            {
-                // set found[x - 1] to be true if we find x in the row
-                int index = grid[row][col] - 1;
-                if (!found[index])
-                {
-                    found[index] = true;
-                }
-                else
-                {
-                    // found it twice, so return false
-                    return false;
-                }
+        boolean[] a = new boolean[9];
+        for (int k=0; k<3; k++) {
+            for (int l=0; l<3; l++) {
+                int val = grid[i+k][j+l];
+                if (val<1||val>9) return false;
+                if (a[val-1]) return false;
+                a[val-1] = true;
             }
         }
-
         return true;
     }
 }

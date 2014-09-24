@@ -37,7 +37,7 @@ public class SeparateChainingHashST<Key, Value> {
 
     //todo void delete(Key key)
     //todo boolean contains(Key key)
-    //todo boolean isEmpty
+    //todo boolean isEmpty()
     //todo int size()
     //todo Iterable<Key> keys()
 
@@ -60,5 +60,13 @@ public class SeparateChainingHashST<Key, Value> {
         }
     }
 
-//    public Value search
+    private static class Cell<K, V>     //Gayle CTCI p312
+    {
+        private K key;
+        private V val;
+        public Cell(K key, V val) {
+            this.key = key;
+            this.val = val;
+        }
+    }
 }
