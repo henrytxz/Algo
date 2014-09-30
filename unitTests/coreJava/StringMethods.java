@@ -17,4 +17,14 @@ public class StringMethods {
         String[] strArray = new String[] {"John", "Mary", "Bob"};
         System.out.println(Arrays.toString(strArray));
     }
+
+    @Test
+    public void test_subString() {
+        String b = "b";
+        Assert.assertEquals("", b.substring(0,0));
+        Assert.assertEquals("b", b.substring(0));
+
+        String abb = "abb";
+        Assert.assertEquals(abb, abb.substring(0));
+    }
 }

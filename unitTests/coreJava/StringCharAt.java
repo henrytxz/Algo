@@ -1,5 +1,6 @@
 package coreJava;
 
+import junit.framework.Assert;
 import org.junit.Test;
 
 /**
@@ -9,7 +10,10 @@ public class StringCharAt {
     @Test
     public void test() {
         String s = "hello";
-        int val = s.charAt(0);
-        System.out.println(val);
+        char c = s.charAt(0);
+        Assert.assertEquals('h', c);
+
+        int val = c;
+        Assert.assertEquals(104, val);
     }
 }
