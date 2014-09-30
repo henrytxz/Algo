@@ -1,4 +1,4 @@
-CourseraAlgo
+Algo
 ============
 
 package sedgy refers to https://class.coursera.org/algs4partI-005 by Robert Sedgewick
