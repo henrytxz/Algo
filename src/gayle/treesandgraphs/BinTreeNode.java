@@ -4,7 +4,7 @@ import edu.princeton.cs.algs4.Queue;
 
 /**
  * Created by henry on 8/20/2014.
- * learn to use an inner class properly
+ * todo: learn to use an inner class properly
  */
 public class BinTreeNode<T> {
     private T val;
@@ -29,24 +29,14 @@ public class BinTreeNode<T> {
     public BinTreeNode getLeft() {return left;}
     public BinTreeNode getRight() {return right;}
 
+    /**
+     * print in level order
+     */
     public void print() {
         edu.princeton.cs.algs4.Queue<BinTreeNode<T>> q = new edu.princeton.cs.algs4.Queue<BinTreeNode<T>>();
         q.enqueue(this);
-//        populateQueue(q, this);
         populateQueue(q, 1, 0);
-
-//        int numberOfNodesAtThisLevel = 1;
-//
-//        while (!q.isEmpty()) {
-//            for (int i=0; i<numberOfNodesAtThisLevel&&!q.isEmpty(); i++) {
-//                System.out.print(q.dequeue()+" ");
-//            }
-//            System.out.println();
-//            numberOfNodesAtThisLevel*=2;
-//        }
     }
-
-//    private void populateQueue(Queue<T> q, BinTreeNode<T> node) {
 
     private void populateQueue(Queue<BinTreeNode<T>> q, int numberOfNodesAtThisLevel, int numberOfNodesPrintedFromThisLevel) {
         BinTreeNode<T> node;
@@ -67,13 +57,6 @@ public class BinTreeNode<T> {
             }
             populateQueue(q, numberOfNodesAtThisLevel, numberOfNodesPrintedFromThisLevel);
         }
-
-//        for (T node : q) {
-//
-//        }
-
-//            populateQueue(q, node.left);
-//            populateQueue(q, node.right);
     }
 
     public String toString() {
