@@ -1,7 +1,6 @@
 package gayle.recursionandDP;
 
 import java.util.Set;
-import java.util.Stack;
 
 /**
  * Created by henry on 9/30/2014.
@@ -20,12 +19,12 @@ public class ValidParentheses {
     }
 
     public static boolean isValidParenthesis(String s) {
-        Stack<Character> openParenStack = new Stack<Character>();
+        int openParen = 0;
+        int closeParen = 0;
         for (int i=0; i!=s.length(); i++) {
-            if (openParenStack.isEmpty() && s.charAt(i)==')') return false;
-
-            if (s.charAt(i)=='(') openParenStack.push('(');
-            else openParenStack.pop();
+            if (s.charAt(i)=='(') openParen++;
+            if (s.charAt(i)==')') closeParen++;
+            if (closeParen>openParen) return false;
         }
         return true;
     }
