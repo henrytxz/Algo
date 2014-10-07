@@ -1,12 +1,10 @@
 package leetCode;
 
-import java.util.ArrayList;
-
 /**
  * Created by henry on 10/3/2014.
  */
 public class BuildTreeFromPreAndInOrder {
-    public TreeNode buildTree(int[] preorder, int[] inorder) {
+    public static TreeNode buildTree(int[] preorder, int[] inorder) {
         if (preorder==null  || inorder==null) return null;
         if (preorder.length != inorder.length) return null;
 
@@ -19,36 +17,26 @@ public class BuildTreeFromPreAndInOrder {
             count++;
         }
 
-        ArrayList<Integer> alPre = new ArrayList<Integer>();
-        ArrayList<Integer> alIn  = new ArrayList<Integer>();
-        int i=1;
-        int j=0;
+        int[] leftPreOrder = new int[count];
+        System.arraycopy(preorder, 1, leftPreOrder, 0, count);
+        int[] leftInOrder  = new int[count];
+        System.arraycopy(inorder, 0, leftInOrder, 0, count);
+        root.left = buildTree(leftPreOrder, leftInOrder);
 
-        while (inorder[j]!=curr) {
-            alPre.add(preorder[i++]);
-            alIn.add(inorder[j++]);
-        }
+        int rightLen = preorder.length-1-count;
+        int[] rightPreOrder = new int[rightLen];
+        System.arraycopy(preorder, count+1, rightPreOrder, 0, rightLen);
+        int[] rightInOrder  = new int[rightLen];
+        System.arraycopy(inorder, count+1, rightInOrder, 0, rightLen);
+        root.right = buildTree(rightPreOrder, rightInOrder);
 
-        root.left = buildTree(alPre.toArray(new Integer[alPre.size()]), alIn.toArray(new Integer[alIn.size()]));
-
+        return root;
     }
 
     public static void main(String[] args) {
         int[] a = new int[]{1,2,3};
-        int[] b = subArray(a, 0, 2);
-        for (int i : b) {
-            System.out.println(i);
-        }
+        int[] b = new int[]{2,1,3};
+        TreeNode root = buildTree(a, b);
+        System.out.println("pause");
     }
-
-    private static int[] subArray(int[] a, int begin, int len) {
-        int[] result = new int[len];
-        System.arraycopy(a, begin, result, 0, len);
-        return result;
-    }
-
-    //        for (int i=0; i<a.length; i++) {
-    //            result[i] = a[i];
-    //        }
-
 }
