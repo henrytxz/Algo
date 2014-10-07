@@ -19,12 +19,13 @@ public class HashMap<K, V> {
         numberOfBuckets = keys.length;
         numberOfEntries = 0;
         loadFactor = 0.75;  //0.75 is the default load factor for Java's HashMap
+        shrinkFactor = 0.25;
     }
 
     public void put(K key, V val) {
         int i = hash(key);
         if (keys[i]!=null && keys[i].equals(key)) { vals[i]=val; return; }
-        while (keys[i]!=null) i=(i+1) % numberOfBuckets;
+        while (keys[i]!=null) i= getNextSlot(i);
         keys[i] = key;
         vals[i] = val;
         numberOfEntries++;
@@ -41,8 +42,49 @@ public class HashMap<K, V> {
         while (true) {
             if (keys[i] == null) return null;
             else if (keys[i].equals(key)) return vals[i];
-            else i = (i + 1) % numberOfBuckets;
+            else i = getNextSlot(i);
         }
+    }
+
+    public void remove(K key) {
+        int i=hash(key);
+        int indexFound;
+        while (keys[i]!=null) {
+            if (keys[i].equals(key)) {
+                keys[i] = null;
+                vals[i] = null;
+                if (numberOfEntries == shrinkFactor*numberOfBuckets) {
+                    resize(numberOfBuckets/2);
+                } else {
+                    rehashCluster(getNextSlot(i));
+                }
+                indexFound = i;
+            }
+        }
+    }
+
+    private void rehashCluster(int first) {
+        int i = first;
+        while (keys[i]!=null) {
+            i = getNextSlot(i);
+        }
+
+        for (int j=first; j!=i; j=getNextSlot(j)) {
+            K key = keys[j];
+            V val = vals[j];
+            keys[j] = null;
+            vals[j] = null;
+            put(key, val);
+        }
+
+//        int j=first;
+//        for (int count=0; count!=)
+
+        int newIndex = hash(keys[i]);
+    }
+
+    private int getNextSlot(int i) {
+        return (i+1) % numberOfBuckets;
     }
 
     public int getNumberOfEntries() {return numberOfEntries;}
