@@ -8,9 +8,16 @@ public class HashMap<K, V> {
 
     private static final int INITIAL_CAPACITY = 4;
 
+    /**
+     * use the default initial capacity none specified
+     */
     public HashMap() {
-        keys = (K[]) new Object[INITIAL_CAPACITY];
-        vals = (V[]) new Object[INITIAL_CAPACITY];
+        this(INITIAL_CAPACITY);
+    }
+
+    public HashMap(int initialCapacity) {
+        keys = (K[]) new Object[initialCapacity];
+        vals = (V[]) new Object[initialCapacity];
         numberOfBuckets = keys.length;
         numberOfEntries = 0;
     }
@@ -22,7 +29,6 @@ public class HashMap<K, V> {
         keys[i] = key;
         vals[i] = val;
         numberOfEntries++;
-        System.out.println("updated keys["+i+"] to "+key+", val to "+val);
         if (numberOfEntries == loadFactor * numberOfBuckets) {
             resize(2 * numberOfBuckets);
         }
@@ -41,10 +47,8 @@ public class HashMap<K, V> {
     public void remove(K key) {
         int i=hash(key);
         while (keys[i]!=null) {
-//            System.out.println("keys["+i+"]:"+keys[i]);
             if (keys[i].equals(key)) {
-                keys[i] = null;
-                vals[i] = null;
+                remove(i);
                 if (numberOfEntries == shrinkFactor*numberOfBuckets) {
                     resize(numberOfBuckets/2);
                 } else {
@@ -56,12 +60,6 @@ public class HashMap<K, V> {
         }
     }
 
-    public void print() {
-        for (int i=0;i<numberOfBuckets;i++){
-            System.out.println("keys["+i+"]:"+keys[i]);
-        }
-    }
-
     private void rehashCluster(int first) {
         int i = first;
         while (keys[i]!=null) {
@@ -70,11 +68,18 @@ public class HashMap<K, V> {
 
         for (int j=first; j!=i; j= nextSlot(j)) {
             K key = keys[j];
-            V val = vals[j];
-            keys[j] = null;
-            vals[j] = null;
-            put(key, val);
+            if (key!=null) {
+                V val = vals[j];
+                remove(j);
+                put(key, val);
+            }
         }
+    }
+
+    private void remove(int i) {
+        keys[i] = null;
+        vals[i] = null;
+        numberOfEntries--;
     }
 
     private int nextSlot(int i) {
@@ -84,10 +89,6 @@ public class HashMap<K, V> {
     private int nextSlot(int i, int arrayLength) {
         return (i+1) % arrayLength;
     }
-
-    public int getNumberOfEntries() {return numberOfEntries;}
-
-    public int getNumberOfBuckets() {return numberOfBuckets;}
 
     /**
      *  & 0x7fffffff makes sure the integer returned is non-negative and hence a valid array index
@@ -100,16 +101,12 @@ public class HashMap<K, V> {
         numberOfBuckets = newSize;
         K[] newKeyArray = (K[]) new Object[newSize];
         V[] newValArray = (V[]) new Object[newSize];
-//        System.out.println(keys.length);
         for (int i=0; i!=keys.length; i++) {
             if (keys[i]!=null) {
-                if (i==2)
-                    System.out.println("pause");
                 int newIndex = hash(keys[i]);
                 while (newKeyArray[newIndex] != null) newIndex = nextSlot(newIndex, newKeyArray.length);
                 newKeyArray[newIndex] = keys[i];
                 newValArray[newIndex] = vals[i];
-                System.out.println("updated newKeyArray[" + newIndex + "] to " + keys[i] + ", newValArray to " + vals[i]);
             }
         }
         keys = newKeyArray;

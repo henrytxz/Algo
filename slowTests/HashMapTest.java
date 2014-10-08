@@ -22,36 +22,17 @@ public class HashMapTest {
         for (int i=0;i!=ints.size();i++) {
             hm.put(i, chars.get(i));
         }
-        Assert.assertEquals(7, hm.getNumberOfEntries());
-        Assert.assertEquals(16, hm.getNumberOfBuckets());
-    }
 
-    @Test
-    public void testResizeShrink() {
-        HashMap<SillyChar, Integer> hms = new HashMap<SillyChar, Integer>();
-        ArrayList<SillyChar> chars = new ArrayList<SillyChar>();
-        for (char c='a';c!='h';c++) {
-            chars.add(new SillyChar(c));
-        }
-        ArrayList<Integer> ints = new ArrayList<Integer>();
         for (int i=0;i!=7;i++) {
-            ints.add(i);
+            Assert.assertEquals(chars.get(i), hm.get(ints.get(i)));
         }
 
-        for (int i=0;i!=ints.size();i++) {
-//            if (i==3)
-//                System.out.println("pause");
-            hms.put(chars.get(i), i);
-        }
-
-        hms.print();
-
-        hms.remove(new SillyChar('a'));
-        hms.remove(new SillyChar('b'));
-        Assert.assertEquals(5, hms.getNumberOfEntries());
-//        Assert.assertEquals(16, hms.getNumberOfBuckets());
+        Assert.assertNull(hm.get(7));
     }
 
+    /**
+     * a custom data type that always collide and hence useful for the next test, testResizeShrink()
+     */
     private class SillyChar {
         Character c;
         SillyChar(char c) { this.c = c; }
@@ -71,6 +52,31 @@ public class HashMapTest {
         }
 
         public String toString() {return c.toString();}
+    }
+
+    @Test
+    public void testResizeShrink() {
+        HashMap<SillyChar, Integer> hms = new HashMap<SillyChar, Integer>();
+        ArrayList<SillyChar> chars = new ArrayList<SillyChar>();
+        for (char c='a';c!='h';c++) {
+            chars.add(new SillyChar(c));
+        }
+        ArrayList<Integer> ints = new ArrayList<Integer>();
+        for (int i=0;i!=7;i++) {
+            ints.add(i);
+        }
+
+        for (int i=0;i!=ints.size();i++) {
+            hms.put(chars.get(i), i);
+        }
+
+        hms.remove(new SillyChar('a'));
+        hms.remove(new SillyChar('b'));
+        Assert.assertNull(hms.get(new SillyChar('a')));
+        Assert.assertNull(hms.get(new SillyChar('b')));
+        for (int i=2;i!=7;i++) {
+            Assert.assertEquals(ints.get(i), hms.get(chars.get(i)));
+        }
     }
 
     @Test
