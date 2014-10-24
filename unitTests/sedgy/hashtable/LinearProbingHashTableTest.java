@@ -1,15 +1,17 @@
+package sedgy.hashtable;
+
 import junit.framework.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
 
-public class HashMapTest {
+public class LinearProbingHashTableTest {
 
-    private HashMap<Integer, Character> hm = new HashMap<Integer, Character>();
+    private LinearProbingHashTable<Integer, Character> hm = new LinearProbingHashTable<Integer, Character>();
 
     @Test
-    public void testResizeExpand() {
-        hm = new HashMap<Integer, Character>();
+    public void testPut() {
+        hm = new LinearProbingHashTable<Integer, Character>();
         ArrayList<Integer> ints = new ArrayList<Integer>();
         for (int i=0;i!=7;i++) {
             ints.add(i);
@@ -23,6 +25,8 @@ public class HashMapTest {
             hm.put(i, chars.get(i));
         }
 
+        Assert.assertEquals(7, hm.numberOfEntries());
+
         for (int i=0;i!=7;i++) {
             Assert.assertEquals(chars.get(i), hm.get(ints.get(i)));
         }
@@ -31,9 +35,9 @@ public class HashMapTest {
     }
 
     /**
-     * a custom data type that always collide and hence useful for the next test, testResizeShrink()
+     *  a custom data type that always collide and hence tests the rehashing logic when removing entries from the hashmap
      */
-    private class SillyChar {
+    private static class SillyChar {
         Character c;
         SillyChar(char c) { this.c = c; }
 
@@ -55,8 +59,8 @@ public class HashMapTest {
     }
 
     @Test
-    public void testResizeShrink() {
-        HashMap<SillyChar, Integer> hms = new HashMap<SillyChar, Integer>();
+    public void testRemove() {
+        LinearProbingHashTable<SillyChar, Integer> hms = new LinearProbingHashTable<SillyChar, Integer>();
         ArrayList<SillyChar> chars = new ArrayList<SillyChar>();
         for (char c='a';c!='h';c++) {
             chars.add(new SillyChar(c));
@@ -72,6 +76,7 @@ public class HashMapTest {
 
         hms.remove(new SillyChar('a'));
         hms.remove(new SillyChar('b'));
+        Assert.assertEquals(5, hms.numberOfEntries());
         Assert.assertNull(hms.get(new SillyChar('a')));
         Assert.assertNull(hms.get(new SillyChar('b')));
         for (int i=2;i!=7;i++) {

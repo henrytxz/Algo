@@ -1,9 +1,14 @@
-public class HashMap<K, V> {
+package sedgy.hashtable;
+
+/**
+ *  an open addressing hash table
+ */
+public class LinearProbingHashTable<K, V> {
     private K[] keys;
     private V[] vals;
     private int numberOfEntries;
     private int numberOfBuckets;
-    private double loadFactor   = 0.75;    //how full the HT gets before adding buckets, 0.75 is the default load factor for Java's HashMap
+    private double loadFactor   = 0.75;    //how full the HT gets before adding buckets, 0.75 is the default load factor for Java's sedgy.hashtable.HashMap
     private double shrinkFactor = 0.25;    //how empty the HT gets before deleting buckets
 
     private static final int INITIAL_CAPACITY = 4;
@@ -11,11 +16,11 @@ public class HashMap<K, V> {
     /**
      * use the default initial capacity none specified
      */
-    public HashMap() {
+    public LinearProbingHashTable() {
         this(INITIAL_CAPACITY);
     }
 
-    public HashMap(int initialCapacity) {
+    public LinearProbingHashTable(int initialCapacity) {
         keys = (K[]) new Object[initialCapacity];
         vals = (V[]) new Object[initialCapacity];
         numberOfBuckets = keys.length;
@@ -59,6 +64,8 @@ public class HashMap<K, V> {
             i= nextSlot(i);
         }
     }
+
+    public int numberOfEntries() { return numberOfEntries; }
 
     private void rehashCluster(int first) {
         int i = first;

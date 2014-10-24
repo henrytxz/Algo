@@ -42,7 +42,7 @@ public class FirstNonRepeatingCharacter {
         res = firstNonRepeatingCharacter(_input);
         System.out.println(res);
 
-//        Map<Character, Integer> map = new HashMap<Character, Integer>();
+//        Map<Character, Integer> map = new sedgy.hashtable.HashMap<Character, Integer>();
 //        map.put('c', 3);
 //
 //        Integer count = map.get('h');

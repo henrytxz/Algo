@@ -10,7 +10,7 @@ import java.util.Arrays;
  */
 public class StringMethods {
     @Test
-    public void test() {
+    public void test_subString1() {
         String s = "hello";
         Assert.assertEquals("", s.substring(5));
 
@@ -19,12 +19,20 @@ public class StringMethods {
     }
 
     @Test
-    public void test_subString() {
+    public void test_subString2() {
         String b = "b";
         Assert.assertEquals("", b.substring(0,0));
         Assert.assertEquals("b", b.substring(0));
 
         String abb = "abb";
         Assert.assertEquals(abb, abb.substring(0));
+    }
+
+    @Test
+    public void test_strip() {
+        String s = "A man, a plan, a canal: Panama";
+        System.out.println(s.replaceAll("\\s", ""));
+        System.out.println(s.replaceAll("[^a-zA-Z]", ""));
+        System.out.println(s.replaceAll("[^a-zA-Z ]", ""));
     }
 }
