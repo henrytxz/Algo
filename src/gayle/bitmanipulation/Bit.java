@@ -17,7 +17,8 @@ public class Bit {
      * @return either x or x + setting the ith bit
      */
     public static int setBit(int x, int i) {
-        return x | (1<<i);
+        return (x | (1<<i));
+//        & 0x7fffffff;
     }
 
     public static int clearBit(int x, int i) {

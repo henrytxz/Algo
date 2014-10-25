@@ -5,9 +5,9 @@ import java.util.Comparator;
 /**
  * Created by henry on 10/24/2014.
  */
-public class KeyAndOrder {
+public class KeyAndOrder implements Comparable {
 
-    static public final Comparator<KeyAndOrder> BY_ORDER = new ByOrder();
+//    static public final Comparator<KeyAndOrder> BY_ORDER = new ByOrder();
 
     int key;
     int order;
@@ -18,6 +18,7 @@ public class KeyAndOrder {
 
     @Override
     public boolean equals(Object obj) {
+        if (this==obj) return true;
         if (obj instanceof KeyAndOrder) {
             KeyAndOrder that = (KeyAndOrder) obj;
             return key==that.key&&order==that.order;
@@ -28,6 +29,15 @@ public class KeyAndOrder {
     @Override
     public String toString() {
         return "["+key+":"+order+"]";
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if (this==o) return 0;
+        KeyAndOrder that = (KeyAndOrder) o;
+        if (order < that.order) return -1;
+        if (order== that.order) return  0;
+        return 1;
     }
 
     private static class ByOrder implements Comparator<KeyAndOrder>

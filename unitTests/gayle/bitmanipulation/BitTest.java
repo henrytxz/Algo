@@ -27,6 +27,8 @@ public class BitTest {
     public void testSetBit() throws Exception {
         Assert.assertEquals(15, Bit.setBit(15, 2)); //15 is 1111, an eg of ith bit already set
         Assert.assertEquals(7, Bit.setBit(5, 1));   //3 is 101,   an eg of ith bit not already set
+        Assert.assertEquals(1, Bit.setBit(0,0));
+        Assert.assertEquals(2, Bit.setBit(0,1));
     }
 
     @Test
